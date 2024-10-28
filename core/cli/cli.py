@@ -17,10 +17,18 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 
 def main():
+    """
+    Main Command Line Interface Logic
+    ---------------------------------
+
+    Currently does everything in one swoop, in the future this should be expanded 
+    in functionality as the software matures 
+    """
+
     # Set up argument parser
     parser = argparse.ArgumentParser(description='CLI tool for refining code.')
     subparsers = parser.add_subparsers(dest='command', required=True)
-
+    
     parser_refine = subparsers.add_parser('refine')
 
     parser_refine.add_argument('--env', default='staging', type=str, required=False, help='Environment to use (e.g., staging, production). Defaults to staging')
