@@ -80,16 +80,22 @@ class Refinement:
                     {"role": "system", "content": self.description},
                     {"role": "system", "content": self.instructions},
                     {"role": "user", "content": original_content}
-                ]
+                ], 
+                stream=True
             )
-            refined_content = completion.choices[0].message.content
-            self.write(data=refined_content)
+            # refined_content = completion.choices[0].message.content
+            # self.write(data=refined_content)
+            
+            for chunk in completion: 
+                refined_content = chunk.choices[0].delta.content
+                self.write(data=refined_content)
 
 
 if __name__ == "__main__":
     
-    Refinement()
+    # Refinement()
     
-    # env = "staging"
-    # cf = Refinement(env=env)
-    # cf.refine()
+    env = "staging"
+    file_path = "/Users/teraearlywine/Engineering/Consulting/auto_code/test.py"
+    cf = Refinement(env=env)
+    cf.refine()
