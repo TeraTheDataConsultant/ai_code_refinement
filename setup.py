@@ -29,7 +29,7 @@ setup(
     entry_points={
         "console_scripts": [
             # command=folder.script_name:main   # example
-            # "tdc=cli.cli:main",               # tdc refine --env='staging' --file='test.py'
+            "tdc=cli.cli:main",               # tdc refine --env='staging' --file='test.py'
         ],
     },
     include_package_data=True,
