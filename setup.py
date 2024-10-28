@@ -13,7 +13,7 @@ def read_requirements():
 
 
 setup(
-    name="auto_code",
+    name="ai_code_refinement",
     version="0.0.2",
     description="Cowgirl AI - Core Assistant",
     long_description=open("README.md").read(),
