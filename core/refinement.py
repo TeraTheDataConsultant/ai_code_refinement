@@ -53,7 +53,7 @@ class Refinement:
         """
 
         try:
-            with open(self.file_path, 'w', encoding='utf-8') as file:
+            with open(self.file_path, 'a', encoding='utf-8') as file:
                 file.write(data)
             logger.info(f"Wrote data to {self.file_path}")
         except FileNotFoundError:
@@ -97,5 +97,5 @@ if __name__ == "__main__":
     
     env = "staging"
     file_path = "/Users/teraearlywine/Engineering/Consulting/auto_code/test.py"
-    cf = Refinement(env=env)
+    cf = Refinement(env=env, file_path=file_path)
     cf.refine()
