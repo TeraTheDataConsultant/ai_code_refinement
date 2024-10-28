@@ -80,6 +80,7 @@ class Refinement:
         """
 
         original_content = self.read()
+
         if original_content is not None:
 
             completion = self.client.chat.completions.create(
@@ -91,8 +92,8 @@ class Refinement:
                     {"role": "user", "content": original_content}
                 ]
             )
-
             refined_content = completion.choices[0].message.content
+            
             self.write(data=refined_content)
 
 
