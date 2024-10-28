@@ -84,7 +84,8 @@ class Refinement:
         if original_content is not None:
 
             completion = self.client.chat.completions.create(
-                model="chatgpt-4o-latest",
+                # model="chatgpt-4o-latest",
+                model="o1-mini",
                 temperature=0.1, 
                 messages=[
                     {"role": "system", "content": self.description},
@@ -93,7 +94,7 @@ class Refinement:
                 ]
             )
             refined_content = completion.choices[0].message.content
-            
+
             self.write(data=refined_content)
 
 
