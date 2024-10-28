@@ -14,11 +14,11 @@ def read_requirements():
 
 setup(
     name="ai_code_refinement",
-    version="0.0.2",
-    description="Cowgirl AI - Core Assistant",
+    version="0.0.3",
+    description="AI Code Refinement",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/TeraTheDataConsultant/auto_code",
+    url="https://github.com/TeraTheDataConsultant/ai_code_refinement",
     author="Tera Earlywine",
     author_email="tera.earlywine@qbizinc.com",
     # license='MIT',
