@@ -50,7 +50,7 @@ class Refinement:
         -----
         Rewrites content to the same file.
         """
-        assert isinstance(data, str), "Data to write must be a string"
+
         try:
             with open(self.file_path, 'w', encoding='utf-8') as file:
                 file.write(data)
