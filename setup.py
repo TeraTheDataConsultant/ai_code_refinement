@@ -28,8 +28,8 @@ setup(
     python_requires=">=3.10",
     entry_points={
         "console_scripts": [
-            # command=folder.script_name.main   # example
-            # "refine=cli.refine:main",         # refine --file='test.py'
+            # command=folder.script_name:main   # example
+            # "refine=cli.cli:main",         # tdc --file='test.py'
         ],
     },
     include_package_data=True,

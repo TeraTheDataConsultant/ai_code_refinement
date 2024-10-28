@@ -19,8 +19,12 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 def main():
     # Set up argument parser
     parser = argparse.ArgumentParser(description='CLI tool for refining code.')
-    parser.add_argument('--env', default='staging', type=str, required=True, help='Environment to use (e.g., staging, production). Defaults to staging')
-    parser.add_argument('--file', type=str, required=True, help='Path to the file to be refined')
+    subparsers = parser.add_subparsers(dest='command', required=True)
+
+    parser_refine = subparsers.add_parser('refine')
+
+    parser_refine.add_argument('--env', default='staging', type=str, required=False, help='Environment to use (e.g., staging, production). Defaults to staging')
+    parser_refine.add_argument('--file', type=str, required=True, help='Path to the file to be refined')
 
     # Parse arguments
     args = parser.parse_args()
