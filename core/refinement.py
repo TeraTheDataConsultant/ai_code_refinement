@@ -2,6 +2,7 @@ from core.utils.logs import logger
 from core.clients.config import config
 import os
 
+
 class Refinement:
     """
     Refinement
@@ -69,6 +70,7 @@ class Refinement:
         Passes file content to chat completion. If file-path is not passed
         as a parameter, it uses the current file.
         """
+        
         original_content = self.read()
         if original_content is not None:
             completion = self.client.chat.completions.create(
@@ -84,6 +86,9 @@ class Refinement:
             self.write(data=refined_content)
 
 if __name__ == "__main__":
-    env = "staging"
-    cf = Refinement(env=env)
-    cf.refine()
+    
+    Refinement()
+    
+    # env = "staging"
+    # cf = Refinement(env=env)
+    # cf.refine()
