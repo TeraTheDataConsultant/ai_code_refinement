@@ -74,7 +74,7 @@ class Refinement:
         original_content = self.read()
         if original_content is not None:
             completion = self.client.chat.completions.create(
-                model="gpt-4-turbo",
+                model="gpt-4o-mini",
                 temperature=0.1,
                 messages=[
                     {"role": "system", "content": self.description},
