@@ -14,7 +14,7 @@ def read_requirements():
 
 setup(
     name="auto_code",
-    version="1.0.2",
+    version="0.0.1",
     description="Cowgirl AI - Core Assistant",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
@@ -23,13 +23,13 @@ setup(
     author_email="tera.earlywine@qbizinc.com",
     # license='MIT',
     packages=find_packages(where='core'),
-    package_dir={'': 'scorerc'},
+    package_dir={'': 'core'},
     install_requires=read_requirements(),
     python_requires=">=3.10",
     entry_points={
         "console_scripts": [
             # command=folder.script_name:main   # example
-            # "refine=cli.cli:main",         # tdc --file='test.py'
+            # "tdc=cli.cli:main",               # tdc refine --env='staging' --file='test.py'
         ],
     },
     include_package_data=True,
