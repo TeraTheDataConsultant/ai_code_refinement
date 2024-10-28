@@ -1,4 +1,6 @@
+from core.utils import constants
 from core.utils.logs import logger
+from core.utils.errors import error_handler
 from core.clients.config import config
 import os
 
@@ -11,40 +13,28 @@ class Refinement:
     Defaults to the current file if no path is provided.
     """
     def __init__(self, env, file_path=None):
-        assert isinstance(env, str), "Environment must be a string"
         self.env = env
         self.file_path = file_path or __file__
         self.cfg = config(env=self.env)
         self.client = self.cfg.openai_client
 
-        self.description = "Generalized programming assistant bot for generation and optimization."
-        self.instructions = (
-            "No chat response needed, just respond with the code. "
-            "Focus on instruction following TODO: or FIX: "
-            "If none provided, just write comments at the end of doc to improve code. "
-            "Implement using software engineering development best practices. "
-            "Include new features or libraries that would improve functionality. "
-            "Add assertions and logging where necessary."
-        )
+        self.description = constants.DESCRIPTION
+        self.instructions = constants.INSTRUCTIONS
 
+    @error_handler
     def read(self):
         """
         Read
         ----
         Reads file path or current file contents.
         """
-        try:
-            with open(self.file_path, 'r') as file:
-                file_contents = file.read()
-            logger.info(f"Read {len(file_contents)} bytes from {self.file_path}")
-            return file_contents
-        except FileNotFoundError:
-            logger.error(f"File {self.file_path} not found.")
-            return None
-        except Exception as e:
-            logger.error(f"An error occurred while reading file: {e}")
-            return None
 
+        with open(self.file_path, 'r') as file:
+            file_contents = file.read()
+        logger.info(f"Read {len(file_contents)} bytes from {self.file_path}")
+        return file_contents
+    
+    @error_handler
     def write(self, data):
         """
         Write
@@ -52,17 +42,11 @@ class Refinement:
         Rewrites content to the same file.
         """
 
-        try:
-            with open(self.file_path, 'a', encoding='utf-8') as file:
-                file.write(data)
-            logger.info(f"Wrote data to {self.file_path}")
-        except FileNotFoundError:
-            logger.error(f"File {self.file_path} not found.")
-            return False
-        except Exception as e:
-            logger.error(f"An error occurred while writing to file: {e}")
-            return False
+        with open(self.file_path, 'a', encoding='utf-8') as file:
+            file.write(data)
+        logger.info(f"Wrote data to {self.file_path}")
 
+    @error_handler
     def refine(self):
         """
         Refine
@@ -72,6 +56,7 @@ class Refinement:
         """
         
         original_content = self.read()
+
         if original_content is not None:
             completion = self.client.chat.completions.create(
                 model="gpt-4o-mini",
@@ -88,14 +73,17 @@ class Refinement:
             
             for chunk in completion: 
                 refined_content = chunk.choices[0].delta.content
-                self.write(data=refined_content)
+                if refined_content is not None: 
+                    self.write(data=refined_content)
+                else: 
+                    logger.info("Moving on -- no content found")
 
 
 if __name__ == "__main__":
     
-    # Refinement()
+    Refinement()
     
-    env = "staging"
-    file_path = "/Users/teraearlywine/Engineering/Consulting/auto_code/test.py"
-    cf = Refinement(env=env, file_path=file_path)
-    cf.refine()
+    # env = "staging"
+    # file_path = "/Users/teraearlywine/Engineering/Consulting/auto_code/core/cli/cli.py"
+    # cf = Refinement(env=env, file_path=file_path)
+    # cf.refine()
