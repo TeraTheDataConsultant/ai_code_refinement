@@ -1,16 +1,8 @@
 """
-TODO: 
+CONSTANT MANAGEMENT
 
-Set up a constants file that contains the following 
-1. constants that define AI assistant programming helper (i.e. front_end)
-2. the description of that assistant 
-3. instructions for the assistant to use relating to reading / writing files in context
 """
 
-# Add a programming assistant for quality assurance, unit testing and DRY # constants.py
-
-# Constants for AI Assistant Programming Helper
-FRONT_END = "AI Assistant Programming Helper"
 DESCRIPTION = "This assistant helps with programming tasks, providing code generation and optimization support."
 INSTRUCTIONS = (
     "The assistant can read files to understand the context of the programming task."
