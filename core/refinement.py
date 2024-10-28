@@ -85,6 +85,7 @@ class Refinement:
             refined_content = completion.choices[0].message.content
             self.write(data=refined_content)
 
+
 if __name__ == "__main__":
     
     Refinement()
