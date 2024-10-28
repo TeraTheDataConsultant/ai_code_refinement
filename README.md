@@ -1,7 +1,14 @@
 # AI Code Refinement Tool 
 
 
-Configuration
+```zsh
+
+# Installing ai_code_refinement 
+pip3 install ai_code_refinement
+
+# Upgrading to get the latest version
+pip3 install ai_code_refinement --upgrade 
+```
 
 <!-- 
 TODO: 
