@@ -14,7 +14,7 @@ def read_requirements():
 
 setup(
     name="ai_code_refinement",
-    version="0.0.6",
+    version="0.0.7",
     description="AI Code Refinement",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
