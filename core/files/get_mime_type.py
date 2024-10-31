@@ -5,8 +5,8 @@ from core.utils.logs import logger
 
 class GetMimeType:
     """
-    Get Mime Type 
-    -------------
+    Get Mime Type (or extension)
+    ----------------------------
 
     Makes a call to the builtin mimetypes library, if a file is a certain type 
     sets the class attribute mime_type to that string, otherwise returns the mime type 
@@ -41,6 +41,7 @@ class GetMimeType:
             logger.error(f"File not found: {self.file_path}")
 
         self.mime_type, _ = mimetypes.guess_type(self.file_path)
+        self.extension = mimetypes.guess_extension(self.mime_type)
 
         if self.mime_type is None:
             logger.warning(f"Could not determine MIME type for: {self.file_path}")
@@ -51,5 +52,6 @@ if __name__ == "__main__":
 
     GetMimeType()
 
-# TODO: Add unit tests for get_mime_type function.
-# TODO: Consider adding support for URLs or remote files.
+    # file_path = '/Users/teraearlywine/Eng/Consulting/auto_code/core/files/get_mime_type.py'
+    # gmt = GetMimeType(env='staging', file_path=file_path)
+    # print(gmt.extension)
