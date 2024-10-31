@@ -16,7 +16,7 @@ error() {
 
 build() {
     echo "Starting to build project..."
-    python -m build 
+    python3 -m build 
     echo "Project built" 
 }
 
