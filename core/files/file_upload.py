@@ -6,6 +6,7 @@ from pathlib import Path
 class FileUpload:
 
     def __init__(self, env):
+
         self.env = env 
         self.cfg = config(env=self.env)
         self.client = self.cfg.openai_client
@@ -27,13 +28,17 @@ class FileUpload:
         For non in-memory uploads, all that's needed is the full 
         path for the file, the mime_type and purpose. 
         """
-        
+        from core.files.get_mime_type import GetMimeType
+
         bytes = len(data)
+        gmt = GetMimeType(env=self.env, file_path=file_name)
+
         try: 
             upload = self.client.uploads.upload_file_chunked(
                 file=data,
                 filename=file_name,
                 bytes=int(bytes),
+                mime_type=gmt.mime_type,
                 **kwargs
             )
             return upload 

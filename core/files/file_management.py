@@ -125,7 +125,11 @@ class FileManagement:
 
         Upload Files to Open AI in Memory.
         Currently only supports python files, in the future this should map the allowed extensions to the mime type
-
+        
+        Note: the mimetype is automatically determined via file_upload class, this part is required 
+        in order to upload files using this method. The input file extension is used to determine the mimetype 
+        via the mimetypes library. 
+        
         Usage::
 
             >>> env = 'staging'
@@ -140,14 +144,12 @@ class FileManagement:
             if in_memory:
                 files = self.get_files()
                 for file in files: 
-                    if file.endswith('.txt') and file != '__init__.py':  # Only upload python files for the time being
+                    if file.endswith('.py') and file != '__init__.py':  # Only upload python files for the time being
                         data = self.read_io(file=file, in_memory=in_memory)
                         fu = FileUpload(env=self.env)
                         fu.upload(
                             file_name=file,
                             data=data, 
-                            mime_type='text/plain', 
-                            # mime_type='application/msword',
                             purpose='assistants'
                         )
             else: 
@@ -183,4 +185,9 @@ class FileManagement:
 
 if __name__ == "__main__":
 
-    FileManagement()
+    # FileManagement()
+
+    env = 'staging'
+    root_directory = './core/files'
+    fm = FileManagement(env=env, root_directory=root_directory)
+    fm.upload_files_io(in_memory=True)
