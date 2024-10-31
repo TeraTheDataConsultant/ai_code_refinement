@@ -1,0 +1,1 @@
+# Write a script that determines the mime type for the given filepath
