@@ -11,6 +11,10 @@ class GetMimeType:
     Makes a call to the builtin mimetypes library, if a file is a certain type 
     sets the class attribute mime_type to that string, otherwise returns the mime type 
     unknown response: 'application/octet-stream'. 
+
+    This is important for uploading files to the OpenAI api, 
+    the mime_type is required for a given file_path, this streamlines the process 
+    when batch uploading something
     
     Attributes
     ----------
